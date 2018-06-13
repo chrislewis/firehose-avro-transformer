@@ -1,0 +1,14 @@
+{"namespace": "com.meetup.base.avro",
+ "type": "record",
+ "name": "NgaRec",
+ "doc": "v1",
+ "fields": [
+     {"name": "timestamp", "type": "string"},
+     {"name": "chapterId", "type": "int"},
+	 {"name": "memberScores", "type": {"type": "map", "values": "float"}},
+	 {"name": "variant", "type": "string"},
+	 {"name": "excludes", "type": {"type": "array", "items": "int"}},
+	 {"name": "limit", "type": "int"},
+	 {"name": "fastPass", "type": "boolean"}
+	 ]
+}

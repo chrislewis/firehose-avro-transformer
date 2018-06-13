@@ -1,0 +1,20 @@
+{
+ "namespace": "com.meetup.base.avro",
+ "type": "record",
+ "name": "InvitationSend",
+ "doc": "v1",
+ "fields": [
+    {"name": "requestId", "type": "string"},
+    {"name": "timestamp", "type": "string"},
+    {"name": "memberId", "type": "int"},
+    {"name": "source", "type": "string" },
+    {"name": "toTableName", "type": "string" },
+    {"name": "toTableId", "type": "int" },
+    {"name": "numSent", "type": "int" },
+    {"name": "senderStatus", "type": {
+        "type": "enum",
+        "name": "InvitationSenderStatus",
+        "symbols": ["ORGANIZER", "CO_ORGANIZER", "ASST_ORGANIZER", "MEMBER", "OTHER"]
+    }}
+ ]
+}

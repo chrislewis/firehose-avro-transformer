@@ -1,0 +1,25 @@
+service: firehose-avro-transformer
+
+provider:
+  name: aws
+  runtime: java8
+  iamRoleStatements:
+    -  Effect: "Allow"
+       Action:
+         - "s3:*"
+       Resource: "arn:aws:s3:::${env:TARGET_BUCKET}/*"
+package:
+  artifact: ./target/scala-2.11/firehose-avro-transformer.jar
+  include:
+    - ./target/scala-2.11/firehose-avro-transformer.jar
+  exclude:
+    - ./**
+
+functions:
+  transform:
+    handler: com.meetup.aws.lambda.Handler
+    timeout: 300
+    memorySize: 1500
+    environment:
+      TARGET_BUCKET: ${env:TARGET_BUCKET}
+      TARGET_PREFIX: ${env:TARGET_PREFIX}

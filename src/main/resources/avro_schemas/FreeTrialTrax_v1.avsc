@@ -1,0 +1,13 @@
+{"namespace": "com.meetup.base.avro",
+ "type": "record",
+ "name": "FreeTrialTrax",
+ "doc": "v1",
+ "fields": [
+     {"name": "requestId", "type": "string"},
+     {"name": "timestamp", "type": "string"},
+     {"name": "trackId", "type": "string"},
+     {"name": "memberId", "type": "int"},
+     {"name": "experimentName", "type": "string"},
+     {"name": "population", "type": "string"}
+ ]
+}

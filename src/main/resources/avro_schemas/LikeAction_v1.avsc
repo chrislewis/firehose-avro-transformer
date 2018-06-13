@@ -1,0 +1,14 @@
+{"namespace": "com.meetup.base.avro",
+ "type": "record",
+ "name": "LikeAction",
+ "doc": "v1",
+ "fields": [
+     {"name": "requestId", "type": "string"},
+     {"name": "timestamp", "type": "string"},
+     {"name": "memberId", "type": "int"},
+     {"name": "chapterId", "type": "int"},
+     {"name": "eventId", "type": ["int", "null"]},
+     {"name": "likedItemId", "type": "int"},
+     {"name": "likedItemMemberId", "type": "int"}
+ ]
+}

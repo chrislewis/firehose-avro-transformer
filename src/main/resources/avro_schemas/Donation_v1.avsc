@@ -1,0 +1,14 @@
+{"namespace": "com.meetup.base.avro",
+ "type": "record",
+ "name": "Donation",
+ "doc": "v1",
+ "fields": [
+     {"name": "requestId", "type": "string"},
+     {"name": "timestamp", "type": "string"},
+     {"name": "memberId", "type": "int"},
+     {"name": "memberDonationHistoryId", "type": "int", "default": 0},
+     {"name": "memberDonationPreapprovalId", "type": "int", "default": 0},
+     {"name": "platform", "type": "string"},
+     {"name": "version", "type": "int", "default": 0}
+ ]
+}

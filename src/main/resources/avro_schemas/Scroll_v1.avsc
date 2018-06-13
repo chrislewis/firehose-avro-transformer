@@ -1,0 +1,13 @@
+{"namespace": "com.meetup.base.avro",
+ "type": "record",
+ "name": "Scroll",
+ "doc": "v1",
+ "fields": [
+    {"name": "requestId", "type": "string"},
+    {"name": "timestamp", "type": "string"},
+    {"name": "memberId", "type": "int"},
+    {"name": "isPlus", "type": "boolean"},
+    {"name": "elementSelector", "type": "string"},
+    {"name": "viewportWidth", "type": "int"}
+ ]
+}

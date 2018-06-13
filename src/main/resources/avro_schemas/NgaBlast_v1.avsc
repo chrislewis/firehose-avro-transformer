@@ -1,0 +1,13 @@
+{"namespace": "com.meetup.base.avro",
+ "type": "record",
+ "name": "NgaBlast",
+ "doc": "v1",
+ "fields": [
+     {"name": "timestamp", "type": "string"},
+     {"name": "chapterId", "type": "int"},
+     {"name": "categoryId", "type": "int"},
+     {"name": "originalSize", "type": "int"},
+     {"name": "finalSize", "type": "int"},
+     {"name": "fastPass", "type": "boolean", "default": false}
+ ]
+}

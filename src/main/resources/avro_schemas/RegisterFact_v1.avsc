@@ -1,0 +1,15 @@
+{"namespace": "com.meetup.base.avro",
+ "type": "record",
+ "name": "RegisterFact",
+ "doc": "v1",
+ "fields": [
+ 	{"name": "requestId", "type": "string"},
+	{"name": "timestamp", "type": "string", "default": ""},
+ 	{"name": "memberId", "type": "int", "default": -1},
+	{"name": "platform", "type": "string"},
+	{"name": "intent", "type": "string"},
+	{"name": "referralSource", "type": "string"},
+	{"name": "originalReferer", "type": "string"},
+	{"name": "regMethod", "type": "string"}
+ ]
+}

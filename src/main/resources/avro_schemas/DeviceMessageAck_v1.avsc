@@ -1,0 +1,13 @@
+{"namespace": "com.meetup.base.avro",
+ "type": "record",
+ "name": "DeviceMessageAck",
+ "doc": "v1",
+ "fields": [
+     {"name": "timestamp", "type": "string"},
+     {"name": "memberId", "type": "int"},
+     {"name": "notifyAddressId", "type": "int"},
+     {"name": "carrier", "type": "string"},
+     {"name": "model", "type": "string", "default": "" },
+     {"name": "version", "type": "int", "default": 0 }
+ ]
+}

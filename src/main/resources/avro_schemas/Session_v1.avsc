@@ -1,0 +1,19 @@
+{"namespace": "com.meetup.base.avro",
+ "type": "record",
+ "name": "Session",
+ "doc": "v1",
+ "fields": [
+     {"name": "sessionId", "type": "string"},
+     {"name": "startTime", "type": "string"},
+     {"name": "endTime", "type": "string"},
+     {"name": "numRequests", "type": "int"},
+     {"name": "joins", "type": "int", "default": -1},
+     {"name": "rsvps", "type": "int", "default": -1},
+     {"name": "registers", "type": "int", "default": -1},
+     {"name": "invitationActions", "type": "int", "default": -1},
+     {"name": "invitationSends", "type": "int", "default": -1},
+     {"name": "platform", "type": "string"},
+     {"name": "frequentMemberId", "type": "int"},
+     {"name": "numMemberIds", "type": "int"}
+ ]
+}

@@ -1,0 +1,20 @@
+{"namespace": "com.meetup.base.avro",
+ "type": "record",
+ "name": "PopulationMember",
+ "doc": "v2",
+ "fields": [
+     {"name": "timestamp", "type": "string"},
+     {"name": "member_id", "type": "int"},
+     {"name": "population", "type": "int"},
+     {"name": "experiment_name", "type": "string", "default": ""},
+     {"name": "active", "type": "boolean", "default": false},
+     {"name": "pushable", "type": "boolean", "default": false},
+     {"name": "org", "type": "boolean", "default": false},
+     {"name": "new_reg", "type": "boolean", "default": false},
+     {"name": "push_and_email", "type": "boolean", "default": false},
+     {"name": "recent_rsvper", "type": "boolean", "default": false},
+     {"name": "never_active", "type": "boolean", "default": false},
+     {"name": "bitmap", "type": "int", "default": 0},
+     {"name": "code", "type": "string", "default": ""}
+ ]
+}

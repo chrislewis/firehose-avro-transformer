@@ -1,0 +1,15 @@
+{"namespace": "com.meetup.base.avro",
+ "type": "record",
+ "name": "ChapterCreate",
+ "doc": "v2",
+ "fields": [
+     {"name": "timestamp", "type": "string"},
+     {"name": "memberId", "type": "int"},
+     {"name": "trackId",  "type": "string"},
+     {"name": "referer",  "type": "string"},
+     {"name": "ic", "type": "string"},
+     {"name": "traxUuid", "type": "string"},
+     {"name": "platform", "type": "string"},
+     {"name": "mobile", "type": "boolean"}
+ ]
+}

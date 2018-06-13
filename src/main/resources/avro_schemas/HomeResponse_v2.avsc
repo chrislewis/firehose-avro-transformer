@@ -1,0 +1,23 @@
+{"namespace": "com.meetup.base.avro",
+ "type": "record",
+ "name": "HomeResponse",
+ "doc": "v2",
+ "fields": [
+     {"name": "timestamp", "type": "string"},
+     {"name": "memberId", "type": "int"},
+	 {
+	 	"name": "rows",
+	 	"type": {
+	 		"type": "array", "items": {
+	 			"name": "HomeResponseRow",
+	 			"type": "record",
+	 			"fields": [
+	 				{"name": "title", "type": "string"},
+	 				{"name": "chapterIds", "type": {"type": "array", "items": "int"}},
+	 				{"name": "seededTopicIds", "type": {"type": "array", "items": "int"}}
+	 			]
+	 		}
+	 	}
+	 }
+ ]
+}

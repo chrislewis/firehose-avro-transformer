@@ -1,0 +1,11 @@
+{"namespace": "com.meetup.base.avro",
+ "type": "record",
+ "name": "FacebookFriends",
+ "doc": "v1",
+ "fields": [
+     {"name": "requestId", "type": "string"},
+     {"name": "timestamp", "type": "string"},
+     {"name": "memberId", "type": "int"},
+     {"name": "facebookFriends", "type": {"type": "array", "items": "int"}}
+ ]
+}

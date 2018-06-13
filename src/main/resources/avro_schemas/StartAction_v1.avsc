@@ -1,0 +1,24 @@
+{"namespace": "com.meetup.base.avro",
+ "type": "record",
+ "name": "StartAction",
+ "doc": "v1",
+ "fields": [
+     {"name": "requestId", "type": "string"},
+     {"name": "timestamp", "type": "string"},
+     {"name": "trackId", "type": "string"},
+     {"name": "memberId", "type": "int"},
+     {"name": "chapterId", "type": "int"},
+     {"name": "action", "type": {
+        "type": "enum",
+        "name": "StartActionType",
+        "symbols": ["BEGIN", "LOCATION", "TOPICS", "PLEDGE", "NAME", "DESCRIPTION",
+                    "MEMBERS", "URL", "REGISTER", "LOGIN", "SUBSCRIPTION",
+                    "CONFIRM", "SUCCESS", "RECEIPT"]
+     }},
+     {"name": "content", "type": "string"},
+     {"name": "isPlus", "type": "boolean"},
+     {"name": "draftType", "type": {"type": "enum", "name": "StartDraftType", "symbols": ["WINBACK", "RECENT", "NO_DRAFT"]}},
+     {"name": "coupons", "type": {"type": "array", "items": "int"}},
+     {"name": "items", "type": {"type": "array", "items": "int"}}
+ ]
+}

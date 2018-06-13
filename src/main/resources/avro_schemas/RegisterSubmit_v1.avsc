@@ -1,0 +1,16 @@
+{"namespace": "com.meetup.base.avro",
+ "type": "record",
+ "name": "RegisterSubmit",
+ "doc": "v1",
+ "fields": [
+     {"name": "requestId", "type": "string", "default": ""},
+     {"name": "timestamp", "type": "string", "default": ""},
+     {"name": "memberId", "type": "int", "default": -1},
+     {"name": "alienTrackId", "type": "string", "default": ""},
+     {"name": "method", "type": "string", "default": ""},  // the registration method, e.g. facebook, google, email, third-party
+     {"name": "zip", "type": "string", "default": ""},
+     {"name": "country", "type": "string", "default": ""},
+     {"name": "chapterId", "type": "int", "default": -1},
+     {"name": "autoVerify", "type": "boolean", "default": false}
+ ]
+}

@@ -1,0 +1,14 @@
+{"namespace": "com.meetup.base.avro",
+ "type": "record",
+ "name": "AppRequest",
+ "doc": "v1",
+ "fields": [
+   {"name": "requestId", "type": "string"},
+   {"name": "memberId", "type": "int"},
+   {"name": "osName", "type": "string", "default": ""},
+   {"name": "osVersion", "type": "string", "default": ""},
+   {"name": "appVersion", "type": "string", "default": ""},
+   {"name": "timestamp", "type": "string"}
+  ]
+}
+							  ]

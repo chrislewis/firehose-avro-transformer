@@ -1,0 +1,20 @@
+{
+ "namespace": "com.meetup.base.avro",
+ "type": "record",
+ "name": "InvitationAction",
+ "doc": "v1",
+ "fields": [
+    {"name": "requestId", "type": "string"},
+    {"name": "timestamp", "type": "string"},
+    {"name": "invitationId", "type": "int"},
+    {"name": "memberId", "type": "int"},
+    {"name": "source", "type": "string" },
+    {"name": "toTableName", "type": "string" },
+    {"name": "toTableId", "type": "int" },
+    {"name": "action", "type": {
+        "type": "enum",
+        "name": "InvitationActionType",
+        "symbols": ["CLICKED", "REGISTERED", "ACCEPTED"]
+    }}
+ ]
+}

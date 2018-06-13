@@ -1,0 +1,16 @@
+{"namespace": "com.meetup.base.avro",
+ "type": "record",
+ "name": "Activity",
+ "doc": "v1",
+ "fields": [
+     {"name": "requestId", "type": "string"},
+     {"name": "timestamp", "type": "string"},
+     {"name": "url", "type": "string"},
+     {"name": "memberId", "type": "int"},
+     {"name": "trackId", "type": "string"},
+     {"name": "mobileWeb", "type": "boolean"},
+     {"name": "platform", "type": "string"},
+     {"name": "referer", "type": "string"},
+     {"name": "trax", "type": {"type": "map", "values": "string"}}
+ ]
+}

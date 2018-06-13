@@ -1,0 +1,11 @@
+{"namespace": "com.meetup.base.avro",
+ "type": "record",
+ "name": "ChapterMemberTreatment",
+ "doc": "v1",
+ "fields": [
+     {"name": "timestamp", "type": "string"},
+     {"name": "memberId", "type": "int"},
+     {"name": "testUUID", "type": "string"},
+     {"name": "testGroup", "type": "string"}
+ ]
+}

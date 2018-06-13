@@ -1,0 +1,11 @@
+{"namespace": "com.meetup.base.avro",
+ "type": "record",
+ "name": "ExperimentStatus",
+ "doc": "v1",
+ "fields": [
+   {"name": "experimentCode", "type": "string"},
+   {"name": "active", "type": "boolean"},
+   {"name": "timestamp", "type": "string"}
+ ]
+}
+

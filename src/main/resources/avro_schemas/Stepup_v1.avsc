@@ -1,0 +1,12 @@
+{"namespace": "com.meetup.base.avro",
+ "type": "record",
+ "name": "Stepup",
+ "doc": "v1",
+ "fields": [
+     {"name": "timestamp", "type": "string"},
+     {"name": "memberInitiatingId", "type": "int"},
+     {"name": "memberSteppingUpId", "type": "int"},
+     {"name": "chapterId", "type": "int"},
+     {"name": "requestId",  "type": "string"}
+ ]
+}

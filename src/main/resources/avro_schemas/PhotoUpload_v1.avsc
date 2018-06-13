@@ -1,0 +1,17 @@
+{"namespace": "com.meetup.base.avro",
+ "type": "record",
+ "name": "PhotoUpload",
+ "doc": "v1",
+ "fields": [
+     {"name": "requestId", "type": "string"},
+     {"name": "timestamp", "type": "string"},
+     {"name": "eventPhotoId", "type": "int"},
+     {"name": "memberId", "type": "int"},
+     {"name": "photoAlbumId", "type": "int"},
+     {"name": "chapterId", "type": "int"},
+     {"name": "eventId", "type": ["int", "null"]},
+     {"name": "consumerId", "type": "int"},
+     {"name": "description", "type": "string"},
+     {"name": "highres", "type": "boolean"}
+ ]
+}

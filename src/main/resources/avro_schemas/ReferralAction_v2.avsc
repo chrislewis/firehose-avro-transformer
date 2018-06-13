@@ -1,0 +1,21 @@
+{
+ "namespace": "com.meetup.base.avro",
+ "type": "record",
+ "name": "ReferralAction",
+ "doc": "v2",
+ "fields": [
+    {"name": "requestId", "type": "string"},
+    {"name": "timestamp", "type": "string"},
+    {"name": "inviteeMemberId", "type": "int"},
+    {"name": "referrerMemberId", "type": "int"},
+    {"name": "referrerPlatform", "type": "string"},
+    {"name": "toTableName", "type": "string"},
+    {"name": "toTableId", "type": "int"},
+    {"name": "action", "type": {
+        "type": "enum",
+        "name": "ReferralActionType",
+        "symbols": ["CLICKED", "REGISTERED", "ACCEPTED"]
+    }},
+    {"name": "toTableKey", "type": "string", "default": ""}
+ ]
+}

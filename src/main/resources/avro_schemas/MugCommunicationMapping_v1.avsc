@@ -1,0 +1,16 @@
+{"namespace": "com.meetup.base.avro",
+ "type": "record",
+ "name": "MugCommunicationMapping",
+ "doc": "v1",
+ "fields": [
+    {"name": "classicConversationId", "type": "string"},
+    {"name": "serviceConversationId", "type": "string"},
+    {"name": "classicMessageId", "type": ["string", "null"]},
+    {"name": "serviceMessageId", "type": ["string", "null"]},
+    {"name": "type", "type": {
+      "type": "enum",
+      "name": "MugCommunicationMappingType",
+      "symbols": ["CONVERSATION", "MESSAGE"]
+    }}
+  ]
+}

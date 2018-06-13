@@ -1,0 +1,13 @@
+{"namespace": "com.meetup.base.avro",
+ "type": "record",
+ "name": "ChapterMemberPopulation",
+ "doc": "v1",
+ "fields": [
+     {"name": "timestamp", "type": "string"},
+     {"name": "memberId", "type": "int"},
+     {"name": "chapterId", "type": "int"},
+     {"name": "population", "type": ["null", "int"], "default": null},
+     {"name": "experimentName", "type": "string", "default": ""},
+     {"name": "requestId", "type": "string", "default": ""}
+ ]
+}

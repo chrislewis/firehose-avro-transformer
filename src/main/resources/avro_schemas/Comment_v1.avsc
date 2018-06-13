@@ -1,0 +1,15 @@
+{"namespace": "com.meetup.base.avro",
+ "type": "record",
+ "name": "Comment",
+ "doc": "v1",
+ "fields": [
+     {"name": "requestId", "type": "string"},
+     {"name": "timestamp", "type": "string"},
+     {"name": "memberId", "type": "int"},
+     {"name": "chapterId", "type": "int"},
+     {"name": "eventId", "type": "int"},
+     {"name": "itemId", "type": "int"},
+     {"name": "itemMemberId", "type": "int"},
+     {"name": "type", "type": "string"}
+ ]
+}

@@ -1,0 +1,12 @@
+{"namespace": "com.meetup.base.avro",
+ "type": "record",
+ "name": "Treatment",
+ "doc": "v2",
+ "fields": [
+     {"name": "timestamp", "type": "string"},
+     {"name": "memberId", "type": "int"},
+     {"name": "testUUID", "type": "string", "aliases": ["lever"]},
+     {"name": "testGroup", "type": "string", "aliases": ["setting"]},
+     {"name": "population", "type": ["null", "int"], "default": null}
+ ]
+}

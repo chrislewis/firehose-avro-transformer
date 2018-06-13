@@ -1,0 +1,12 @@
+{"namespace": "com.meetup.base.avro",
+ "type": "record",
+ "name": "Appsflyer",
+ "doc": "v1",
+ "fields": [
+         {"name": "timestamp", "type": "string"},
+         {"name": "memberId", "type": "int"},
+         {"name":"requestId", "type": "string"},
+         {"name":"appsflyerId", "type": "string"}
+ ]
+}
+

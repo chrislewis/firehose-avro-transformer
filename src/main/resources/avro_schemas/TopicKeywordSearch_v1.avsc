@@ -1,0 +1,16 @@
+{"namespace": "com.meetup.base.avro",
+ "type": "record",
+ "name": "TopicKeywordSearch",
+ "doc": "v1",
+ "fields": [
+     {"name": "timestamp", "type": "string"},
+     {"name": "token", "type": "string"},
+     {"name": "limit", "type": "int"},
+     {"name": "language", "type": "string"},
+     {"name": "currentTopics", "type": "string"},
+     {"name": "ignoreTopics", "type": "string"},
+     {"name": "resultsFirst", "type": {"type": "array", "items": "int"}},
+     {"name": "resultsRecs", "type": {"type": "array", "items": "int"}},
+     {"name": "resultsSuggs", "type": {"type": "array", "items": "int"}}
+ ]
+}

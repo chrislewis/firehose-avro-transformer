@@ -1,0 +1,13 @@
+{"namespace": "com.meetup.base.avro",
+ "type": "record",
+ "name": "Rsvp",
+ "doc": "v1",
+ "fields": [
+     {"name": "requestId", "type": "string"},
+     {"name": "timestamp", "type": "string"},
+     {"name": "memberId", "type": "int"},
+     {"name": "eventId", "type": "int"},
+     {"name": "chapterId", "type": "int"},
+     {"name": "rsvpCode", "type": "int"}
+ ]
+}

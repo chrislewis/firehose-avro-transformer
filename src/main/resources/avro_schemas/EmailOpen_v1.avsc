@@ -1,0 +1,12 @@
+{"namespace": "com.meetup.base.avro",
+ "type": "record",
+ "name": "EmailOpen",
+ "doc": "v1",
+ "fields": [
+     {"name": "timestamp", "type": "string"},
+     {"name": "sendMoment", "type": "string", "default": ""},
+     {"name": "emailId", "type": "string"},
+     {"name": "memberId", "type": "int", "default": -1},
+     {"name": "xtrack", "type": "string", "default": ""}
+ ]
+}

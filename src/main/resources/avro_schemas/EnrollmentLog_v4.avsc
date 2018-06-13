@@ -1,0 +1,31 @@
+{"namespace": "com.meetup.base.avro",
+ "type": "record",
+ "name": "EnrollmentLog",
+ "doc": "v4",
+ "fields": [
+     {
+       "name": "experimentContext",
+       "type": {
+         "name": "ExperimentContext",
+         "type": "record",
+         "fields": [
+           {"name": "experimentCode", "type": "string"},
+           {"name": "memberId", "type": ["null", "long"], "default": null},
+           {"name": "chapterId", "type": ["null", "long"], "default": null},
+           {"name": "browserId", "type": ["null", "string"], "default": null}
+         ]
+       }
+     },
+     {
+       "name": "experimentValue",
+       "type": {
+         "name": "ExperimentValue",
+         "type": "record",
+         "fields": [
+           {"name": "variant", "type": "string"},
+           {"name": "timestamp", "type": "string"}
+         ]
+       }
+     }
+ ]
+}

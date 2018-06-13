@@ -1,0 +1,13 @@
+{"namespace": "com.meetup.base.avro",
+ "type": "record",
+ "name": "RevokeAddress",
+ "doc": "v1",
+ "fields": [
+     {"name": "timestamp", "type": "string"},
+     {"name": "notifyAddressId", "type": "int"},
+     {"name": "memberId", "type": "int"},
+     {"name": "carrierName", "type": "string"},
+     {"name": "displayModel", "type": "string"},
+     {"name": "version", "type": "int"}
+ ]
+}

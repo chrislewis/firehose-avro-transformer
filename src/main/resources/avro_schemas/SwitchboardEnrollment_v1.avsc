@@ -1,0 +1,10 @@
+{"namespace": "com.meetup.base.avro",
+ "type": "record",
+ "name": "SwitchboardEnrollment",
+ "doc": "v1",
+ "fields": [
+     {"name": "timestamp", "type": "string"},
+     {"name": "memberId", "type": "int"},
+     {"name": "included", "type": "int"}
+ ]
+}

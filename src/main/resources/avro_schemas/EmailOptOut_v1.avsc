@@ -1,0 +1,11 @@
+{"namespace": "com.meetup.base.avro",
+ "type": "record",
+ "name": "EmailOptOut",
+ "doc": "v1",
+ "fields": [
+     {"name": "requestId", "type": "string"},
+     {"name": "timestamp", "type": "string"},
+     {"name": "memberId", "type": "int"},
+     {"name": "email", "type": "string"}
+ ]
+}

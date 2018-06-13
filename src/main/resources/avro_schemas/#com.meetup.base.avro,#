@@ -1,0 +1,10 @@
+ "type": "record",
+  "name": "AppRequest",
+   "doc": "v1",
+    "fields": [
+	     {"name": "memberId", "type": "int"},
+		      {"name": "osName", "type": "string"},
+			       {"name": "osVersion", "type": "string"},
+				        {"name": "appVersion", "type": "string"},
+						     {"name": "timestamp", "type": "string"}
+							  ]

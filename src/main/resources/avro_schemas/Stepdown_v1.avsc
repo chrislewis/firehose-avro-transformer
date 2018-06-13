@@ -1,0 +1,15 @@
+{"namespace": "com.meetup.base.avro",
+ "type": "record",
+ "name": "Stepdown",
+ "doc": "v1",
+ "fields": [
+     {"name": "timestamp", "type": "string"},
+     {"name": "memberInitiatingId", "type": "int"},
+     {"name": "memberSteppingDownId", "type": "int"},
+     {"name": "nomineeId", "type": {"type": "array", "items": "int"} },
+     {"name": "chapterId", "type": "int"},
+     {"name": "stepdownType", "type": "string"},     
+     {"name": "requestId",  "type": "string"}
+ ]
+}
+

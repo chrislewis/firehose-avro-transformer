@@ -1,0 +1,14 @@
+{"namespace": "com.meetup.base.avro",
+ "type": "record",
+ "name": "AppDownloadSMS",
+ "doc": "v1",
+ "fields": [
+     {"name": "requestId", "type": "string"},
+     {"name": "timestamp", "type": "string"},
+     {"name": "memberId", "type": "int"},
+     {"name": "countryCode", "type": "int"},
+     {"name": "phoneNumber", "type": "string"},
+     {"name": "locale", "type": "string"},
+     {"name": "sent", "type": "boolean"}
+ ]
+}

@@ -1,0 +1,21 @@
+{"namespace": "com.meetup.base.avro",
+ "type": "record",
+ "name": "Message",
+ "doc": "v2",
+ "fields": [
+	 {"name": "timestamp", "type": "string"},
+	 {"name": "app", "type": "string", "default":""},
+	 {"name": "msgId", "type": "string", "default":""},
+	 {"name": "signed", "type": "boolean", "default":false},
+	 {"name": "code", "type": "string", "default":""},
+	 {"name": "senderId", "type": "string", "default":""},
+	 {"name": "recipId", "type": "string", "default":""},
+	 {"name": "chapterId", "type": "string", "default":""},
+	 {"name": "eventId", "type": "string", "default":""},
+	 {"name": "mothershipId", "type":"string", "default":""},
+	 {"name": "emailType", "type": "string", "default":""},
+	 {"name": "emailSubtype", "type": "string", "default":""},
+	 {"name": "subject", "type": "string", "default":""},
+	 {"name": "splitz", "type": {"type": "map", "values": "string"}, "default": {}}
+ ]
+}

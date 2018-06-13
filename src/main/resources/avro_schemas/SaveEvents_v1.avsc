@@ -1,0 +1,15 @@
+{"namespace": "com.meetup.base.avro",
+ "type": "record",
+ "name": "SaveEvents",
+ "doc": "v1",
+ "fields": [
+     {"name": "memberId", "type": "int"},
+     {"name": "eventId", "type": "string"},
+     {"name": "timestamp",  "type": "string"},
+     {"name": "action", "type": {
+       "type": "enum",
+       "name": "SaveEventAction",
+       "symbols": ["SAVE", "UNSAVE"]
+     }}
+ ]
+}

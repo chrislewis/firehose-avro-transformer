@@ -1,0 +1,22 @@
+{"namespace": "com.meetup.base.avro",
+ "type": "record",
+ "name": "Request",
+ "doc": "v1",
+ "fields": [
+     {"name": "requestId", "type": "string", "default": ""},
+     {"name": "timestamp", "type": "string", "default": ""},
+     {"name": "url", "type": "string", "default": ""},
+     {"name": "aggregatedUrl", "type": "string", "default": ""},
+     {"name": "ip", "type": "string", "default": ""},
+     {"name": "memberId", "type": "int", "default": 0},
+     {"name": "trackId", "type": "string", "default": ""},
+     {"name": "platform", "type": "string", "default": ""},
+     {"name": "referer", "type": "string", "default": ""},
+     {"name": "sessionId", "type": "string", "default": ""},
+     {"name": "deviceFamily", "type": "string", "default": ""},
+     {"name": "os", "type": "string", "default": ""},
+     {"name": "osVersion", "type": "string", "default": ""},
+     {"name": "userAgent", "type": "string", "default": ""},
+     {"name": "userAgentVersion", "type": "string", "default": ""}
+ ]
+}

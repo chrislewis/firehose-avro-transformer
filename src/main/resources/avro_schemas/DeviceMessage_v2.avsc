@@ -1,0 +1,17 @@
+{"namespace": "com.meetup.base.avro",
+ "type": "record",
+ "name": "DeviceMessage",
+ "doc": "v2",
+ "fields": [
+     {"name": "timestamp", "type": "string"},
+     {"name": "memberId", "type": "int"},
+     {"name": "notifyAddressId", "type": "int"},
+     {"name": "carrier", "type": "string"},
+     {"name": "model", "type": "string"},
+     {"name": "version", "type": "int"},
+     {"name": "silent", "type": "boolean"},
+     {"name": "actKind", "type": "string"},
+     {"name": "template", "type": "string", "default": ""},
+     {"name": "target", "type": {"type": "map", "values": ["string","int","boolean"]}}
+ ]
+}

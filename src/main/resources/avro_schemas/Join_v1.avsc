@@ -1,0 +1,12 @@
+{"namespace": "com.meetup.base.avro",
+ "type": "record",
+ "name": "Join",
+ "doc": "v1",
+ "fields": [
+     {"name": "requestId", "type": "string"},
+     {"name": "timestamp", "type": "string"},
+     {"name": "memberId", "type": "int"},
+     {"name": "chapterId", "type": "int"},
+     {"name": "chapterMemberStatus", "type": "int"}
+ ]
+}

@@ -1,0 +1,24 @@
+{"namespace": "com.meetup.base.avro",
+ "type": "record",
+ "name": "GroupSearch",
+ "doc": "v1",
+ "fields": [
+     {"name": "timestamp", "type": "string", "default": ""},
+     {"name": "memberId", "type": "string", "default": ""},
+     {"name": "trackId", "type": "string", "default": ""},
+     {"name": "searchType", "type": "string", "default": ""},
+     {"name": "catagories", "type":"string", "default": ""},
+     {"name": "terms", "type": "string", "default": ""},
+     {"name": "city", "type": "string", "default": ""},
+     {"name": "state", "type": "string", "default": ""},
+     {"name": "zip", "type": "string", "default": ""},
+     {"name": "country", "type": "string", "default": ""},
+     {"name": "lat", "type": "float", "default": 0.0 },
+     {"name": "lon", "type": "float", "default": 0.0 },
+     {"name": "radius", "type": "float", "default": -1.0 },
+     {"name": "pageSize", "type": "int", "default": -1},
+     {"name": "totalResults", "type": "int", "default": -1},
+     {"name": "offset", "type": "int", "default":-1},
+     {"name": "otherChapterMatches", "type":"int", "default":-1}
+ ]
+}

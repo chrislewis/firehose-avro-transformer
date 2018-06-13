@@ -1,0 +1,14 @@
+{"namespace": "com.meetup.base.avro",
+ "type": "record",
+ "name": "PreferenceSet",
+ "doc": "v1",
+ "fields": [
+     {"name": "requestId", "type": "string"},
+     {"name": "timestamp", "type": "string"},
+     {"name": "memberId", "type": "int"},
+     {"name": "tableName", "type": "string"},
+     {"name": "tableId", "type": "int"},
+     {"name": "prefName", "type": "string"},
+     {"name": "prefValue", "type": "string"}
+ ]
+}

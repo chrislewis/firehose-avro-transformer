@@ -1,0 +1,9 @@
+{"namespace": "com.meetup.base.avro",
+ "type": "record",
+ "name": "SharedRecord",
+ "doc": "v1",
+ "fields": [
+     {"name": "timestamp", "type": "string"},
+	 {"name": "list", "type": {"type": "array", "items": "string"}}	
+	 ]
+}

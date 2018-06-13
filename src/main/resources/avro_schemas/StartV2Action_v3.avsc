@@ -1,0 +1,25 @@
+{"namespace": "com.meetup.base.avro",
+ "type": "record",
+ "name": "StartV2Action",
+ "doc": "v3",
+ "fields": [
+     {"name": "requestId", "type": "string"},
+     {"name": "timestamp", "type": "string"},
+     {"name": "trackId", "type": "string"},
+     {"name": "memberId", "type": "int"},
+     {"name": "chapterId", "type": "int"},
+     {"name": "action", "type": {
+        "type": "enum",
+        "name": "StartV2ActionType",
+        "symbols": ["SEEDEDLANDING", "TOPICLANDING", "BEGIN", "LOCATION", "TOPICS", "TITLEDESC", "GUIDELINES", "REGISTER", "LOGIN", "SUBSCRIPTION", "CONFIRM", "SUCCESS"]
+     }},
+     {"name": "isPlus", "type": "boolean"},
+     {"name": "draftType", "type": {"type": "enum", "name": "StartV2DraftType", "symbols": ["WINBACK", "NO_DRAFT"]}},
+     {"name": "coupons", "type": {"type": "array", "items": "int"}},
+     {"name": "items", "type": {"type": "array", "items": "int"}},
+	 {"name": "isSeeded", "type": "boolean", "default": false},
+	 {"name": "seededTopicId", "type": "int", "default": -1},
+	 {"name": "seededCityId", "type": "int", "default": -1},
+	 {"name": "seededNumInterested", "type": "int", "default": -1}
+ ]
+}

@@ -1,0 +1,13 @@
+{"namespace": "com.meetup.base.avro",
+ "type": "record",
+ "name": "SubscriptionShown",
+ "doc": "v1",
+ "fields": [
+     {"name": "requestId", "type": "string"},
+     {"name": "timestamp", "type": "string"},
+     {"name": "memberId", "type": "int"},
+     {"name": "isPlus", "type": "boolean"},
+     {"name": "coupons", "type": {"type": "array", "items": "int"}},
+     {"name": "items", "type": {"type": "array", "items": "int"}}
+ ]
+}

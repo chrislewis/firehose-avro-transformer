@@ -1,0 +1,15 @@
+{"namespace": "com.meetup.base.avro",
+ "type": "record",
+ "name": "NewSubscription",
+ "doc": "v2",
+ "fields": [
+     {"name": "requestId", "type": "string"},
+     {"name": "timestamp", "type": "string"},
+     {"name": "memberId", "type": "int"},
+     {"name": "subscriptionId", "type": "int", "default": 0},
+     {"name": "itemId", "type": "int", "default": 0},
+     {"name": "orgSubId", "type": "int", "default": 0},
+     {"name": "orgPlanId", "type": "int", "default": 0},
+     {"name": "orgPlanPricePointId", "type": "int", "default": 0}
+ ]
+}

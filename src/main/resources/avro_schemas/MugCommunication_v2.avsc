@@ -1,0 +1,24 @@
+{"namespace": "com.meetup.base.avro",
+ "type": "record",
+ "name": "MugCommunication",
+ "doc": "v2",
+ "fields": [
+    {"name": "requestId", "type": "string"},
+    {"name": "timestamp", "type": "string"},
+    {"name": "conversationId", "type": "string"},
+    {"name": "messageId", "type": ["string", "null"]},
+    {"name": "memberId", "type": "int"},
+    {"name": "associatedMemberId", "type": ["int", "null"]},
+    {"name": "chapterId", "type": "int"},
+    {"name": "type", "type": {
+      "type": "enum",
+      "name": "MugCommunicationType",
+      "symbols": ["CONVERSATION", "MESSAGE"]
+    }},
+    {"name": "action", "type": {
+      "type": "enum",
+      "name": "MugCommunicationActionType",
+      "symbols": ["CREATE", "CREATE_SPAM", "FLAG_SPAM", "FOLLOW", "UNFOLLOW", "INVITE", "DELETE", "LIKE", "UNLIKE"]
+    }}	
+  ]
+}

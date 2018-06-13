@@ -1,0 +1,14 @@
+{"namespace": "com.meetup.base.avro",
+ "type": "record",
+ "name": "ChapterHistoryChange",
+ "doc": "v1",
+ "fields": [
+     {"name": "requestId", "type": "string"},
+     {"name": "oldStatus", "type": ["null", "int"], "default": null},
+     {"name": "status", "type": ["null", "int"], "default": null},
+     {"name": "chapterId", "type": "int"},
+     {"name": "timestamp", "type": "string"},
+     {"name": "oldCoordinatorMemberId", "type": "int"},
+     {"name": "coordinatorMemberId", "type": "int"}
+ ]
+}

@@ -1,0 +1,13 @@
+{"namespace": "com.meetup.base.avro",
+ "type": "record",
+ "name": "TopicAdd",
+ "doc": "v1",
+ "fields": [
+     {"name": "requestId", "type": "string"},
+     {"name": "timestamp", "type": "string"},
+     {"name": "memberId", "type": "int"},
+     {"name": "categoryId", "type": "int"},
+     {"name": "topicId", "type": "int"},
+     {"name": "topicName", "type": "string"}
+ ]
+}

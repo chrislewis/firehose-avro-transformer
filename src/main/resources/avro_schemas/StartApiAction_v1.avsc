@@ -1,0 +1,18 @@
+{"namespace": "com.meetup.base.avro",
+ "type": "record",
+ "name": "StartApiAction",
+ "doc": "v1",
+ "fields": [
+     {"name": "requestId", "type": "string"},
+     {"name": "timestamp", "type": "string"},
+     {"name": "memberId", "type": "int"},
+     {"name": "chapterId", "type": "int"},
+     {"name": "platform", "type": "string"},
+     {"name": "version", "type": "string"},
+     {"name": "action", "type": {
+        "type": "enum",
+        "name": "StartApiActionType",
+        "symbols": ["BEGIN", "NAME", "LAT", "LON", "TOPICS", "DESC", "SUCCESS"]
+     }}
+ ]
+}

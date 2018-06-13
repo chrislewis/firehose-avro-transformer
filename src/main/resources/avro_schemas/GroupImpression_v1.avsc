@@ -1,0 +1,26 @@
+{"namespace": "com.meetup.base.avro",
+  "type": "record",
+  "name": "GroupImpression",
+  "doc": "v1",
+  "fields": [
+    {"name": "flow", "type": "string", "doc":"find page? keyword search results? NGA?"},
+    {"name": "timestamp", "type": "string" },
+    {"name": "memberId", "type": "int" },
+    {"name": "chapterScores", "type": "string" },
+    {"name": "lat", "type": "float", "default": 0.0},
+    {"name": "lon", "type": "float", "default": 0.0},
+    {"name": "zip", "type": "string", "default": "" },
+    {"name": "city", "type": "string", "default": ""},
+    {"name": "state", "type": "string", "default": ""},
+    {"name": "country", "type": "string", "default": ""},
+    {"name": "searchTerms", "type": "string", "default": ""},
+    {"name": "categories", "type": "string", "default": ""},
+    {"name": "radius", "type": "float", "default": -1},
+    {"name": "offset", "type": "int", "default": -1},
+    {"name": "totalAvailable", "type": "int", "default": -1},
+    {"name": "variant", "type": "string"}
+  ]
+}
+
+
+

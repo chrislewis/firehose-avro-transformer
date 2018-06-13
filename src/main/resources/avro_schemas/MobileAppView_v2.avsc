@@ -1,0 +1,18 @@
+{"namespace": "com.meetup.base.avro",
+ "type": "record",
+ "name": "MobileAppView",
+ "doc": "v2",
+ "fields": [
+    {"name": "name", "type": "string"},
+    {"name": "memberId", "type": "int"},
+    {"name": "requestId", "type": "string"},
+    {"name": "timestamp", "type": "string"},
+
+    // flattened out because we'll almost definitely want to talk about them special-like
+    {"name": "eventId", "type": ["null", "int"], "default": null},
+    {"name": "chapterId", "type": ["null", "int"], "default": null},
+
+    {"name": "meta", "type": {"type": "map", "values": "string"}, "default": {}},
+    {"name": "serverTime", "type": "string", "default": ""}
+ ]
+}

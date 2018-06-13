@@ -1,0 +1,10 @@
+{"namespace": "com.meetup.base.avro",
+ "type": "record",
+ "name": "Register",
+ "doc": "v1",
+ "fields": [
+     {"name": "requestId", "type": "string"},
+     {"name": "timestamp", "type": "string"},
+     {"name": "memberId", "type": "int"}
+ ]
+}

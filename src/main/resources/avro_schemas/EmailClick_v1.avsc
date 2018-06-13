@@ -1,0 +1,11 @@
+{"namespace": "com.meetup.base.avro",
+ "type": "record",
+ "name": "EmailClick",
+ "doc": "v1",
+ "fields": [
+	{"name": "timestamp", "type": "string"},
+	{"name": "linkUrl", "type": "string", "default": ""},
+	{"name": "msgId", "type": "string", "default": ""},
+	{"name": "requestId", "type": "string", "default": ""}
+	]
+}

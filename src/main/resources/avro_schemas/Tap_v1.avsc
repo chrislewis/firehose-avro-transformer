@@ -1,0 +1,14 @@
+{"namespace": "com.meetup.base.avro",
+ "type": "record",
+ "name": "Tap",
+ "doc": "v1",
+ "fields": [
+     {"name": "timestamp", "type": "string"},
+	 {"name": "category", "type": "string", "default": ""},
+	 {"name": "memberId", "type": "int", "default": -1},
+	 {"name": "appName", "type": "string", "default": ""},
+	 {"name": "source", "type": "string", "default": ""},
+	 {"name": "kind", "type": "string", "default": ""},
+	 {"name": "uuid", "type": "string", "default": ""}
+ ]
+}
