@@ -1,0 +1,14 @@
+{
+ "namespace": "com.meetup.base.avro",
+ "type": "record",
+ "name": "WeworkVenueMapping",
+ "doc": "v1",
+ "fields": [
+  {"name": "parentRequestId", "type": ["null", "string"], "default": null},
+  {"name": "venueId", "type": "int"},
+  {"name": "timestamp", "type": "string"},
+  {"name": "enrolledTimestamp", "type": "string"},
+  {"name": "primaryVenueId", "type": "int"},
+  {"name": "weworkId", "type": "string"}
+ ]
+}
