@@ -1,0 +1,9 @@
+{"namespace": "com.meetup.base.avro",
+ "type": "record",
+ "name": "SocialRequest",
+ "doc": "v1",
+ "fields": [
+        { "name": "timestamp", "type": "string" },
+        { "name": "formData", "type": "string" },
+    ]
+}
