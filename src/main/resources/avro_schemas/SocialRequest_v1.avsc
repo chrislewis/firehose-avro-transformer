@@ -4,6 +4,6 @@
  "doc": "v1",
  "fields": [
         { "name": "timestamp", "type": "string" },
-        { "name": "formData", "type": "string" },
+        { "name": "formData", "type": "string" }
     ]
 }
