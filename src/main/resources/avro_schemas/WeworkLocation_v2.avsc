@@ -1,0 +1,19 @@
+{
+  "namespace": "com.meetup.base.avro",
+  "type": "record",
+  "name": "WeworkLocation",
+  "doc": "v2",
+  "fields": [
+    {"name": "parentRequestId", "type": ["null", "string"], "default": null},
+    {"name": "timestamp", "type": "string"},
+    {"name": "weworkId", "type": "string"},
+    {"name": "slug", "type": "string"},
+    {"name": "path", "type": "string"},
+    {"name": "lat", "type": "double"},
+    {"name": "lon", "type": "double"},
+    {"name": "name", "type": "string"},
+    {"name": "supportEmail", "type": "string"},
+    {"name": "inMawProgram", "type": "boolean"},
+    {"name": "enrolledTimestamp", "type": "string"}
+  ]
+}
