@@ -17,6 +17,7 @@ import com.amazonaws.services.s3.model.ObjectMetadata
 import com.google.common.io.Resources
 import com.google.common.base.Charsets
 import com.meetup.aws.lambda.model._
+import java.util.UUID.randomUUID
 
 import scala.collection.mutable
 import scala.util.{Failure, Success, Try}
@@ -70,7 +71,8 @@ class Handler extends RequestHandler[Request, Response] {
               + "/av_version="
               + schema.getDoc
               + "/avro-"
-              + System.currentTimeMillis() / 1000, bos)
+              + System.currentTimeMillis() / 1000
+              + "_" + randomUUID, bos)
         }
         case Failure(e) => {
           println ("ERROR: schema not present" + p._1)
