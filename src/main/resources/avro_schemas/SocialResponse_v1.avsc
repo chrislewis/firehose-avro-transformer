@@ -1,7 +1,7 @@
 { "namespace": "com.meetup.base.avro",
   "type": "record",
   "name": "SocialResponse",
-  "doc": "v1"',
+  "doc": "v1",
   "fields": [
     { "name": "timestamp", "type": "string" },
     { "name": "body", "type": "string" }
