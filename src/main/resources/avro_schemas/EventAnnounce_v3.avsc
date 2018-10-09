@@ -2,7 +2,7 @@
    "namespace": "com.meetup.base.avro",
    "type": "record",
    "name": "EventAnnounce",
-   "doc": "v2",
+   "doc": "v3",
    "fields": [
       {"name": "chapterId", "type": ["null", "int"], "default": null},
       {"name": "cc", "type": ["null", "boolean"], "default": null},
