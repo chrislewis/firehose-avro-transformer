@@ -1,0 +1,18 @@
+{"namespace": "com.meetup.base.avro",
+  "type": "record",
+  "name": "ConversationMessage",
+  "doc": "v3",
+  "fields": [
+     {"name": "convoId", "type": ["null", "long"], "default": null},
+     {"name": "convoMessageId", "type": ["null", "long"], "default": null},
+     {"name": "slId", "type": ["null", "long"], "default": null},
+     {"name": "memberId", "type": ["null", "int"], "default": null},
+     {"name": "notificationType", "type": ["null", "string"], "default": null},
+     {"name": "timestamp", "type": ["null", "string"], "default": null},
+     {"name": "systemEvent", "type": ["null", "string"], "default": null},
+     {"name": "recipientId", "type": ["null", "int"], "default": null},
+     {"name": "notifSystemEventTimestamp", "type": ["null", "string"], "default": null},
+     {"name": "serviceName", "type": ["null", "string"], "default": null}
+
+  ]
+ }
