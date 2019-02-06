@@ -1,0 +1,17 @@
+version: 2
+projects: 
+- name: streams
+  dir: "tf/streams"
+  workflow: terraform
+  autoplan:
+    when_modified: ["*.tf*"]
+
+workflows:
+  terraform:
+    plan:
+      steps:
+      - run: terraform init -input=false -no-color
+      - run: terraform plan -input=false -no-color
+    apply:
+      steps:
+      - run: terraform apply -input=false -no-color

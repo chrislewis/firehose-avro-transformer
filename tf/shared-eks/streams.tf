@@ -15,7 +15,7 @@ resource "aws_kinesis_firehose_delivery_stream" "k8s-analytics-prod" {
 
         parameters {
           parameter_name  = "LambdaArn"
-          parameter_value = "arn:aws:lambda:us-east-1:XXXXXXX:function:firehose-avro-transformer-prod-transform:$LATEST"
+          parameter_value = "arn:aws:lambda:us-east-1:856721882819:function:firehose-avro-transformer-prod-transform:$LATEST"
         }
       }
     }
