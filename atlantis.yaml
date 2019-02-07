@@ -14,4 +14,4 @@ workflows:
       - run: terraform plan -input=false -no-color
     apply:
       steps:
-      - run: terraform apply -input=false -no-color
+      - run: terraform apply -input=false -auto-approve -no-color
