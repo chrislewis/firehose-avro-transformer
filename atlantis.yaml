@@ -12,6 +12,3 @@ workflows:
       steps:
       - run: terraform init -input=false -no-color
       - run: terraform plan -input=false -no-color
-    apply:
-      steps:
-      - run: terraform apply -input=false -no-color
