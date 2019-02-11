@@ -5,7 +5,7 @@ resource "aws_kinesis_firehose_delivery_stream" "k8s-analytics-prod" {
   extended_s3_configuration {
     role_arn   = "${aws_iam_role.k8s-analytics-prod_role.arn}"
     bucket_arn = "arn:aws:s3:::com.meetup.firehose"
-    prefix     = "k8s-analytics-prod/"
+    prefix     = "k8s-analytics-prod/brandon-test"
 
     processing_configuration {
       enabled = "true"

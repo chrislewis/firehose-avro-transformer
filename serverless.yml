@@ -8,6 +8,10 @@ provider:
        Action:
          - "s3:*"
        Resource: "arn:aws:s3:::${env:TARGET_BUCKET}/*"
+    -  Effect: "Allow"
+       Action:
+         - "sts:AssumeRole"
+       Resource: ""
 package:
   artifact: ./target/scala-2.11/firehose-avro-transformer.jar
   include:
