@@ -8,6 +8,11 @@ provider:
        Action:
          - "s3:*"
        Resource: "arn:aws:s3:::${env:TARGET_BUCKET}/*"
+    - Effect: "Allow"
+      Action:
+        - "sts:*"
+      Resource: "arn:aws:iam::212646169882:role/firehose-avro-transformer"
+
 package:
   artifact: ./target/scala-2.11/firehose-avro-transformer.jar
   include:
@@ -23,3 +28,4 @@ functions:
     environment:
       TARGET_BUCKET: ${env:TARGET_BUCKET}
       TARGET_PREFIX: ${env:TARGET_PREFIX}
+      REGION: us-east-1

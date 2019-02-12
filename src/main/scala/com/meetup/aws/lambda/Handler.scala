@@ -34,11 +34,10 @@ class Handler extends RequestHandler[Request, Response] {
   import com.amazonaws.services.securitytoken.model.GetSessionTokenRequest
   import com.amazonaws.services.securitytoken.model.GetSessionTokenResult
 
-  val clientRegion = "*** Client region ***"
-  val roleARN = "*** ARN for role to be assumed ***"
-  val roleSessionName = "*** Role session name ***"
-  val bucketName = "*** Bucket name ***"
-  val stsClient: AWSSecurityTokenService = AWSSecurityTokenServiceClientBuilder.standard.withCredentials(new ProfileCredentialsProvider).withRegion(clientRegion).build
+  val clientRegion = "us-east-1"
+  val roleARN = "arn:aws:iam::212646169882:role/firehose-avro-transformer"
+  val roleSessionName = randomUUID().toString
+  val stsClient : AWSSecurityTokenService = AWSSecurityTokenServiceClientBuilder.standard.withRegion(clientRegion).build()
 
   // Assume the IAM role. Note that you cannot assume the role of an AWS root account;
   // Amazon S3 will deny access. You must use credentials for an IAM user or an IAM role.
@@ -49,8 +48,8 @@ class Handler extends RequestHandler[Request, Response] {
   val getSessionTokenRequest = new GetSessionTokenRequest
   // The duration can be set to more than 3600 seconds only if temporary
   // credentials are requested by an IAM user rather than an account owner.
-  getSessionTokenRequest.setDurationSeconds(7200)
-  val sessionTokenResult: GetSessionTokenResult = stsClient.getSessionToken(getSessionTokenRequest)
+  getSessionTokenRequest.setDurationSeconds(3600)
+  val sessionTokenResult: GetSessionTokenResult = stsClient.getSessionToken (getSessionTokenRequest)
   val sessionCredentials: Credentials = sessionTokenResult.getCredentials
 
   // Package the temporary security credentials as a BasicSessionCredentials object // Package the temporary security credentials as a BasicSessionCredentials object
