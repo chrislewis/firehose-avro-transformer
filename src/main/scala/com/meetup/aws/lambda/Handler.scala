@@ -4,26 +4,61 @@ import java.io.{ByteArrayInputStream, ByteArrayOutputStream}
 import java.util.Base64
 import java.nio.ByteBuffer
 import java.util
-import scala.collection.JavaConversions._
 
+import scala.collection.JavaConversions._
 import scala.collection.mutable.MutableList
 import com.amazonaws.services.lambda.runtime.{Context, RequestHandler}
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.apache.avro.Schema
 import org.apache.avro.file.DataFileWriter
 import org.apache.avro.generic.{GenericDatumWriter, GenericRecord}
-import com.amazonaws.services.s3.AmazonS3ClientBuilder
+import com.amazonaws.services.s3.{AmazonS3, AmazonS3ClientBuilder}
 import com.amazonaws.services.s3.model.ObjectMetadata
 import com.google.common.io.Resources
 import com.google.common.base.Charsets
 import com.meetup.aws.lambda.model._
 import java.util.UUID.randomUUID
 
+import com.amazonaws.auth.{AWSStaticCredentialsProvider, BasicSessionCredentials}
+import com.amazonaws.services.securitytoken.model.Credentials
+
 import scala.collection.mutable
 import scala.util.{Failure, Success, Try}
 
 class Handler extends RequestHandler[Request, Response] {
-  val s3 = AmazonS3ClientBuilder.defaultClient()
+
+  import com.amazonaws.auth.profile.ProfileCredentialsProvider
+  import com.amazonaws.services.securitytoken.AWSSecurityTokenService
+  import com.amazonaws.services.securitytoken.AWSSecurityTokenServiceClientBuilder
+  import com.amazonaws.services.securitytoken.model.AssumeRoleRequest
+  import com.amazonaws.services.securitytoken.model.GetSessionTokenRequest
+  import com.amazonaws.services.securitytoken.model.GetSessionTokenResult
+
+  val clientRegion = "*** Client region ***"
+  val roleARN = "*** ARN for role to be assumed ***"
+  val roleSessionName = "*** Role session name ***"
+  val bucketName = "*** Bucket name ***"
+  val stsClient: AWSSecurityTokenService = AWSSecurityTokenServiceClientBuilder.standard.withCredentials(new ProfileCredentialsProvider).withRegion(clientRegion).build
+
+  // Assume the IAM role. Note that you cannot assume the role of an AWS root account;
+  // Amazon S3 will deny access. You must use credentials for an IAM user or an IAM role.
+  val roleRequest: AssumeRoleRequest = new AssumeRoleRequest().withRoleArn(roleARN).withRoleSessionName(roleSessionName)
+  stsClient.assumeRole(roleRequest)
+
+  // Start a session.
+  val getSessionTokenRequest = new GetSessionTokenRequest
+  // The duration can be set to more than 3600 seconds only if temporary
+  // credentials are requested by an IAM user rather than an account owner.
+  getSessionTokenRequest.setDurationSeconds(7200)
+  val sessionTokenResult: GetSessionTokenResult = stsClient.getSessionToken(getSessionTokenRequest)
+  val sessionCredentials: Credentials = sessionTokenResult.getCredentials
+
+  // Package the temporary security credentials as a BasicSessionCredentials object // Package the temporary security credentials as a BasicSessionCredentials object
+  // for an Amazon S3 client object to use.
+  val basicSessionCredentials = new BasicSessionCredentials(sessionCredentials.getAccessKeyId, sessionCredentials.getSecretAccessKey, sessionCredentials.getSessionToken)
+  val s3: AmazonS3 = AmazonS3ClientBuilder.standard().withCredentials(new AWSStaticCredentialsProvider(basicSessionCredentials))
+    .withRegion(clientRegion).build()
+
   val targetBucket : String = Option(sys.env("TARGET_BUCKET")).getOrElse("com.meetup.firehose")
   val targetPrefix : String = Option(sys.env("TARGET_PREFIX")).getOrElse("avro/")
 
@@ -105,5 +140,4 @@ class Handler extends RequestHandler[Request, Response] {
   def deCamelCase(name: String): String = {
     CaseBoundary.replaceSomeIn (name, m => Some (m.group (1) + "_" + m.group (2) ) ).toLowerCase
   }
-
 }
