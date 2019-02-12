@@ -11,7 +11,7 @@ provider:
     -  Effect: "Allow"
        Action:
          - "sts:AssumeRole"
-       Resource: ""
+       Resource: "arn:aws:iam::212646169882:role/firehose-avro-transformer"
 package:
   artifact: ./target/scala-2.11/firehose-avro-transformer.jar
   include:
