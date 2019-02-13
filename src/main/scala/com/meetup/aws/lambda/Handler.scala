@@ -1,42 +1,34 @@
 package com.meetup.aws.lambda
 
 import java.io.{ByteArrayInputStream, ByteArrayOutputStream}
-import java.util.Base64
 import java.nio.ByteBuffer
 import java.util
-
-import scala.collection.JavaConversions._
-import scala.collection.mutable.MutableList
-import com.amazonaws.services.lambda.runtime.{Context, RequestHandler}
-import com.fasterxml.jackson.databind.ObjectMapper
-import org.apache.avro.Schema
-import org.apache.avro.file.DataFileWriter
-import org.apache.avro.generic.{GenericDatumWriter, GenericRecord}
-import com.amazonaws.services.s3.{AmazonS3, AmazonS3ClientBuilder}
-import com.amazonaws.services.s3.model.ObjectMetadata
-import com.google.common.io.Resources
-import com.google.common.base.Charsets
-import com.meetup.aws.lambda.model._
+import java.util.Base64
 import java.util.UUID.randomUUID
 
 import com.amazonaws.auth.{AWSStaticCredentialsProvider, BasicSessionCredentials}
-import com.amazonaws.services.securitytoken.model.Credentials
+import com.amazonaws.services.lambda.runtime.{Context, RequestHandler}
+import com.amazonaws.services.s3.model.ObjectMetadata
+import com.amazonaws.services.s3.{AmazonS3, AmazonS3ClientBuilder}
+import com.amazonaws.services.securitytoken.model.{AssumeRoleRequest, Credentials, GetSessionTokenRequest, GetSessionTokenResult}
+import com.amazonaws.services.securitytoken.{AWSSecurityTokenService, AWSSecurityTokenServiceClientBuilder}
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.google.common.base.Charsets
+import com.google.common.io.Resources
+import com.meetup.aws.lambda.model._
+import org.apache.avro.Schema
+import org.apache.avro.file.DataFileWriter
+import org.apache.avro.generic.{GenericDatumWriter, GenericRecord}
 
 import scala.collection.mutable
+import scala.util.matching.Regex
 import scala.util.{Failure, Success, Try}
 
 class Handler extends RequestHandler[Request, Response] {
 
-  import com.amazonaws.auth.profile.ProfileCredentialsProvider
-  import com.amazonaws.services.securitytoken.AWSSecurityTokenService
-  import com.amazonaws.services.securitytoken.AWSSecurityTokenServiceClientBuilder
-  import com.amazonaws.services.securitytoken.model.AssumeRoleRequest
-  import com.amazonaws.services.securitytoken.model.GetSessionTokenRequest
-  import com.amazonaws.services.securitytoken.model.GetSessionTokenResult
-
-  val clientRegion = "us-east-1"
-  val roleARN = "arn:aws:iam::212646169882:role/firehose-avro-transformer"
-  val roleSessionName = randomUUID().toString
+  val clientRegion: String = sys.env.getOrElse("REGION", "us-east-1")
+  val roleARN: String = sys.env.getOrElse("ROLE_ARN", "arn:aws:iam::212646169882:role/firehose-avro-transformer")
+  val roleSessionName: String = randomUUID().toString
   val stsClient : AWSSecurityTokenService = AWSSecurityTokenServiceClientBuilder.standard.withRegion(clientRegion).build()
 
   // Assume the IAM role. Note that you cannot assume the role of an AWS root account;
@@ -62,22 +54,20 @@ class Handler extends RequestHandler[Request, Response] {
   val targetPrefix : String = Option(sys.env("TARGET_PREFIX")).getOrElse("avro/")
 
 	def handleRequest(event: Request, context: Context): Response = {
-    val decoder : Base64.Decoder = Base64.getDecoder()
+    val decoder : Base64.Decoder = Base64.getDecoder
     val mapper : ObjectMapper  = new ObjectMapper()
     val result: util.LinkedList[ProcessedRecord] = new util.LinkedList[ProcessedRecord]()
-    val avros: MutableList[AvroRecord] = new MutableList[AvroRecord]()
+    val avros: mutable.MutableList[AvroRecord] = new mutable.MutableList[AvroRecord]()
 
     event.records.foreach(entry => {
       Try {
         mapper.readValue[AvroRecord](decoder.decode(entry.data), classOf[AvroRecord])
       } match {
-        case Success(record) => {
+        case Success(record) =>
           avros+=record
-          result.add(new ProcessedRecord(entry.recordId, "Ok", entry.data))
-        }
-        case Failure(e) => {
-          result.add(new ProcessedRecord(entry.recordId, "ProcessingFailed", entry.data + ":" + e.getMessage))
-        }
+          result.add(ProcessedRecord(entry.recordId, "Ok", entry.data))
+        case Failure(e) =>
+          result.add(ProcessedRecord(entry.recordId, "ProcessingFailed", entry.data + ":" + e.getMessage))
       }
     })
 
@@ -88,7 +78,7 @@ class Handler extends RequestHandler[Request, Response] {
       val records = p._2
 
       getSchema(p._1) match {
-        case Success(schema) => {
+        case Success(schema) =>
           val dataFileWriter = new DataFileWriter[GenericRecord](new GenericDatumWriter[GenericRecord](schema))
           val bos: ByteArrayOutputStream = new ByteArrayOutputStream()
           dataFileWriter.create(schema, bos)
@@ -107,19 +97,17 @@ class Handler extends RequestHandler[Request, Response] {
               + "/avro-"
               + System.currentTimeMillis() / 1000
               + "_" + randomUUID, bos)
-        }
-        case Failure(e) => {
+        case Failure(e) =>
           println ("ERROR: schema not present" + p._1)
-        }
       }
 
 
     })
 
-		return Response(result)
+		Response(result)
 	}
 
-  private def writeObject(bucket:String, key:String, bos: ByteArrayOutputStream) = {
+  private def writeObject(bucket:String, key:String, bos: ByteArrayOutputStream): Unit = {
     val data = bos.toByteArray
     val omd = new ObjectMetadata()
     omd.setContentType("avro/binary")
@@ -135,7 +123,7 @@ class Handler extends RequestHandler[Request, Response] {
     }
  }
 
-  val CaseBoundary = """([a-z0-9_])([A-Z])""".r
+  val CaseBoundary: Regex = """([a-z0-9_])([A-Z])""".r
   def deCamelCase(name: String): String = {
     CaseBoundary.replaceSomeIn (name, m => Some (m.group (1) + "_" + m.group (2) ) ).toLowerCase
   }
