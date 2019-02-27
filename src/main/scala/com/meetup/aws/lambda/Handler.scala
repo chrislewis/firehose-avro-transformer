@@ -34,21 +34,14 @@ class Handler extends RequestHandler[Request, Response] {
   // Assume the IAM role. Note that you cannot assume the role of an AWS root account;
   // Amazon S3 will deny access. You must use credentials for an IAM user or an IAM role.
   val roleRequest: AssumeRoleRequest = new AssumeRoleRequest().withRoleArn(roleARN).withRoleSessionName(roleSessionName)
-  stsClient.assumeRole(roleRequest)
 
-  // Start a session.
-  val getSessionTokenRequest = new GetSessionTokenRequest
-  // The duration can be set to more than 3600 seconds only if temporary
-  // credentials are requested by an IAM user rather than an account owner.
-  getSessionTokenRequest.setDurationSeconds(3600)
-  val sessionTokenResult: GetSessionTokenResult = stsClient.getSessionToken (getSessionTokenRequest)
-  val sessionCredentials: Credentials = sessionTokenResult.getCredentials
-
-  // Package the temporary security credentials as a BasicSessionCredentials object // Package the temporary security credentials as a BasicSessionCredentials object
-  // for an Amazon S3 client object to use.
-  val basicSessionCredentials = new BasicSessionCredentials(sessionCredentials.getAccessKeyId, sessionCredentials.getSecretAccessKey, sessionCredentials.getSessionToken)
-  val s3: AmazonS3 = AmazonS3ClientBuilder.standard().withCredentials(new AWSStaticCredentialsProvider(basicSessionCredentials))
-    .withRegion(clientRegion).build()
+  val s3: AmazonS3 = {
+    val credentials = stsClient.assumeRole(roleRequest).getCredentials()
+    val awsCredentials = new BasicSessionCredentials(credentials.getAccessKeyId, credentials.getSecretAccessKey, credentials.getSessionToken)
+    AmazonS3ClientBuilder.standard()
+      .withCredentials(new AWSStaticCredentialsProvider(awsCredentials))
+      .withRegion(clientRegion).build()
+  }
 
   val targetBucket : String = Option(sys.env("TARGET_BUCKET")).getOrElse("com.meetup.firehose")
   val targetPrefix : String = Option(sys.env("TARGET_PREFIX")).getOrElse("avro/")
