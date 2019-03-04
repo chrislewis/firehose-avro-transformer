@@ -24,27 +24,64 @@ import scala.collection.mutable
 import scala.util.matching.Regex
 import scala.util.{Failure, Success, Try}
 
-class Handler extends RequestHandler[Request, Response] {
+import java.time.{LocalDateTime, ZoneId}
 
-  val clientRegion: String = sys.env.getOrElse("REGION", "us-east-1")
-  val roleARN: String = sys.env.getOrElse("ROLE_ARN", "arn:aws:iam::212646169882:role/firehose-avro-transformer")
-  val roleSessionName: String = randomUUID().toString
-  val stsClient : AWSSecurityTokenService = AWSSecurityTokenServiceClientBuilder.standard.withRegion(clientRegion).build()
 
-  // Assume the IAM role. Note that you cannot assume the role of an AWS root account;
-  // Amazon S3 will deny access. You must use credentials for an IAM user or an IAM role.
-  val roleRequest: AssumeRoleRequest = new AssumeRoleRequest().withRoleArn(roleARN).withRoleSessionName(roleSessionName)
+case class S3(clientRegion: String, roleARN: String){
+    private var _credentials: Credentials = generateNewCredentialsForAssumedRole
+    private var _client: AmazonS3 = constructClientWithCredentials(_credentials)
+    
+    def generateNewCredentialsForAssumedRole(): Credentials = {
+      val roleSessionName: String = randomUUID().toString
+      val stsClient : AWSSecurityTokenService = AWSSecurityTokenServiceClientBuilder.standard.withRegion(clientRegion).build()
+      val roleRequest: AssumeRoleRequest = new AssumeRoleRequest().withRoleArn(roleARN).withRoleSessionName(roleSessionName)
+      stsClient.assumeRole(roleRequest).getCredentials()
+    }
 
-  val s3: AmazonS3 = {
-    val credentials = stsClient.assumeRole(roleRequest).getCredentials()
-    val awsCredentials = new BasicSessionCredentials(credentials.getAccessKeyId, credentials.getSecretAccessKey, credentials.getSessionToken)
-    AmazonS3ClientBuilder.standard()
-      .withCredentials(new AWSStaticCredentialsProvider(awsCredentials))
-      .withRegion(clientRegion).build()
+    def constructClientWithCredentials(credentials: Credentials): AmazonS3 = {
+      AmazonS3ClientBuilder.standard()
+        .withCredentials(new AWSStaticCredentialsProvider(
+          new BasicSessionCredentials(
+          _credentials.getAccessKeyId, 
+          _credentials.getSecretAccessKey, 
+          _credentials.getSessionToken)
+        ))
+        .withRegion(clientRegion).build()
+    }
+
+    def credentialsAreAboutToExpire: Boolean = {
+      val credentialExperation = LocalDateTime.ofInstant(_credentials.getExpiration.toInstant, ZoneId.systemDefault); 
+      credentialExperation.isAfter(LocalDateTime.now.plusMinutes(5))
+    }
+
+    def renewCredentialsAndConstructNewClient: Unit = {
+      println("renewing credentials!")
+      _credentials = generateNewCredentialsForAssumedRole
+      println("updating client")
+      _client = constructClientWithCredentials(_credentials)
+      println("boom updated")
+    }
+    
+    def client: AmazonS3 = {
+      if(credentialsAreAboutToExpire){
+        renewCredentialsAndConstructNewClient
+      }
+      _client
   }
+}
 
+object S3{
+  def apply(): S3 = S3(
+    sys.env.getOrElse("REGION", "us-east-1"), 
+    sys.env.getOrElse("ROLE_ARN", "arn:aws:iam::212646169882:role/firehose-avro-transformer")
+  ) 
+}
+
+class Handler extends RequestHandler[Request, Response] {
+  
   val targetBucket : String = Option(sys.env("TARGET_BUCKET")).getOrElse("com.meetup.firehose")
   val targetPrefix : String = Option(sys.env("TARGET_PREFIX")).getOrElse("avro/")
+  val s3: S3 = S3()
 
 	def handleRequest(event: Request, context: Context): Response = {
     val decoder : Base64.Decoder = Base64.getDecoder
@@ -105,7 +142,7 @@ class Handler extends RequestHandler[Request, Response] {
     val omd = new ObjectMetadata()
     omd.setContentType("avro/binary")
     omd.setContentLength(data.length)
-    s3.putObject(bucket, key, new ByteArrayInputStream(bos.toByteArray), omd)
+    s3.client.putObject(bucket, key, new ByteArrayInputStream(bos.toByteArray), omd)
     println (s"Written $key")
   }
 
