@@ -51,7 +51,9 @@ case class S3(clientRegion: String, roleARN: String){
 
     def credentialsAreAboutToExpire: Boolean = {
       val credentialExperation = LocalDateTime.ofInstant(_credentials.getExpiration.toInstant, ZoneId.systemDefault); 
-      credentialExperation.isAfter(LocalDateTime.now.plusMinutes(5))
+      println("credential expiration: " + credentialExperation)
+      println("now: " + LocalDateTime.now)
+      credentialExperation.isBefore(LocalDateTime.now.plusMinutes(5))
     }
 
     def renewCredentialsAndConstructNewClient: Unit = {
