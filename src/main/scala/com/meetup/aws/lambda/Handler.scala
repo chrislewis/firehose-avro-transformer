@@ -26,8 +26,12 @@ import scala.util.{Failure, Success, Try}
 
 import java.time.{LocalDateTime, ZoneId}
 
+trait S3 {
+  def client: AmazonS3
+}
 
-case class S3(clientRegion: String, roleARN: String){
+object S3{
+  case class AssumedRoleS3(roleARN: String, clientRegion: String) extends S3 {
     private var _credentials: Credentials = generateNewCredentialsForAssumedRole
     private var _client: AmazonS3 = constructClientWithCredentials(_credentials)
     
@@ -59,9 +63,9 @@ case class S3(clientRegion: String, roleARN: String){
     def renewCredentialsAndConstructNewClient: Unit = {
       println("renewing credentials!")
       _credentials = generateNewCredentialsForAssumedRole
-      println("updating client")
+      println("updating client credentials")
       _client = constructClientWithCredentials(_credentials)
-      println("boom updated")
+      println("client credentials updated")
     }
     
     def client: AmazonS3 = {
@@ -69,14 +73,19 @@ case class S3(clientRegion: String, roleARN: String){
         renewCredentialsAndConstructNewClient
       }
       _client
+    }
   }
-}
 
-object S3{
-  def apply(): S3 = S3(
-    sys.env.getOrElse("REGION", "us-east-1"), 
-    sys.env.getOrElse("ROLE_ARN", "arn:aws:iam::212646169882:role/firehose-avro-transformer")
-  ) 
+  class NoAssumeRoleS3 extends S3{
+    val client: AmazonS3 = AmazonS3ClientBuilder.defaultClient()
+  }
+
+  def apply(): S3 = sys.env.get("ROLE_ARN") match {
+      case Some(roleARN) => 
+        new AssumedRoleS3(roleARN, sys.env.getOrElse("REGION", "us-east-1"))
+      case None => 
+        new NoAssumeRoleS3()
+ }
 }
 
 class Handler extends RequestHandler[Request, Response] {

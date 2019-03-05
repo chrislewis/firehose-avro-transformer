@@ -28,4 +28,5 @@ functions:
     environment:
       TARGET_BUCKET: ${env:TARGET_BUCKET}
       TARGET_PREFIX: ${env:TARGET_PREFIX}
+      ROLE_ARN: ${env:ROLE_ARN}
       REGION: us-east-1
