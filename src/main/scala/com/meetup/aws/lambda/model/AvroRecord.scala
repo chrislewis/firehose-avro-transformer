@@ -7,4 +7,4 @@ case class AvroRecord(@BeanProperty var record: String,
                       @BeanProperty var date: String,
                       @BeanProperty var contentType: String = "avro/binary") {
   def this() = this(null,null,null)
-}//application/json
+}
