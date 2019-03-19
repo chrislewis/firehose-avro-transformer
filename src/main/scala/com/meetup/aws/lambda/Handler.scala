@@ -2,22 +2,20 @@ package com.meetup.aws.lambda
 
 import com.amazonaws.services.lambda.runtime.{Context, RequestHandler}
 import com.amazonaws.services.s3.model.ObjectMetadata
-
 import com.fasterxml.jackson.databind.ObjectMapper
-
 import com.google.common.base.Charsets
 import com.google.common.io.Resources
 import com.meetup.aws.lambda.model._
 import com.meetup.aws.lambda.util.S3Client
-
 import org.apache.avro.Schema
 import org.apache.avro.file.DataFileWriter
-import org.apache.avro.generic.{GenericDatumWriter, GenericRecord}
-
+import org.apache.avro.generic.{GenericDatumReader, GenericDatumWriter, GenericRecord}
 import java.io.{ByteArrayInputStream, ByteArrayOutputStream}
 import java.nio.ByteBuffer
-import java.util.{LinkedList, Base64}
+import java.util.Base64
 import java.util.UUID.randomUUID
+
+import org.apache.avro.io.DecoderFactory
 
 import scala.collection.mutable
 import scala.util.matching.Regex
@@ -29,9 +27,9 @@ class Handler extends RequestHandler[Request, Response] {
   val targetBucket : String = Option(sys.env("TARGET_BUCKET")).getOrElse("com.meetup.firehose")
   val targetPrefix : String = Option(sys.env("TARGET_PREFIX")).getOrElse("avro/")
   val s3: S3Client = S3Client()
+  val decoder : Base64.Decoder = Base64.getDecoder
 
 	def handleRequest(event: Request, context: Context): Response = {
-    val decoder : Base64.Decoder = Base64.getDecoder
     val mapper : ObjectMapper  = new ObjectMapper()
     val result: java.util.LinkedList[ProcessedRecord] = new java.util.LinkedList[ProcessedRecord]()
     val avros: mutable.MutableList[AvroRecord] = new mutable.MutableList[AvroRecord]()
@@ -60,7 +58,7 @@ class Handler extends RequestHandler[Request, Response] {
           val bos: ByteArrayOutputStream = new ByteArrayOutputStream()
           dataFileWriter.create(schema, bos)
           records.foreach(entry => {
-            dataFileWriter.appendEncoded(ByteBuffer.wrap(decoder.decode(entry.record)))
+            doAppend(dataFileWriter, entry, schema)
           })
           dataFileWriter.close()
 
@@ -83,6 +81,19 @@ class Handler extends RequestHandler[Request, Response] {
 
 		Response(result)
 	}
+
+  protected def doAppend(writer: DataFileWriter[GenericRecord], record: AvroRecord, schema: Schema) = {
+    record.contentType match {
+      case "application/json" =>
+        val unescapedJson = record.record.replace("\\\"", "\"")
+        val bin = new ByteArrayInputStream(unescapedJson.getBytes("UTF-8"))
+        val jsonDecoder = DecoderFactory.get.jsonDecoder(schema, bin)
+        val datumReader = new GenericDatumReader[GenericRecord](schema)
+        val datum = datumReader.read(null, jsonDecoder)
+        writer.append(datum)
+      case _ => writer.appendEncoded(ByteBuffer.wrap(decoder.decode(record.record)))
+    }
+  }
 
   private def writeObject(bucket:String, key:String, bos: ByteArrayOutputStream): Unit = {
     val data = bos.toByteArray
