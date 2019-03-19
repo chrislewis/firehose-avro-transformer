@@ -1,5 +1,5 @@
-resource "aws_iam_role" "k8s-analytics-prod_role" {
-  name = "k8s-analytics-prod_role"
+resource "aws_iam_role" "marketplace-innovation-dev" {
+  name = "marketplace-innovation-dev"
 
   assume_role_policy = <<EOF
 {
