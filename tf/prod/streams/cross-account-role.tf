@@ -22,7 +22,6 @@ resource "aws_iam_role_policy_attachment" "firehose-avro-transformer-AmazonS3Ful
   policy_arn = "arn:aws:iam::aws:policy/AmazonKinesisFirehoseFullAccess"
 }
 
-
 resource "aws_iam_role_policy_attachment" "firehose-avro-transformer-AmazonKinesisFirehoseFullAccess" {
   role       = "${aws_iam_role.firehose-avro-transformer.name}"
   policy_arn = "arn:aws:iam::aws:policy/AmazonKinesisFirehoseFullAccess"
