@@ -56,7 +56,7 @@ class Handler extends RequestHandler[Request, Response] {
         case Success(schema) =>
           val dataFileWriter = new DataFileWriter[GenericRecord](new GenericDatumWriter[GenericRecord](schema))
           val bos: ByteArrayOutputStream = new ByteArrayOutputStream()
-          dataFileWriter.crqeate(schema, bos)
+          dataFileWriter.create(schema, bos)
           records.foreach(entry => {
             doAppend(dataFileWriter, entry, schema)
           })
