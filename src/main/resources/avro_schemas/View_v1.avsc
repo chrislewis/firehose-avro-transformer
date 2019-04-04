@@ -7,7 +7,7 @@
      {"name": "timestamp", "type": "string"},
      {"name": "memberId", "type": "int"},
      {"name": "browserId", "type":"string", "default": "" },
-	 {"name": "ip", "type": "string", "default": ""},
+     {"name": "ip", "type": "string", "default": ""},
      {"name": "agent", "type": "string", "default": ""},
      {"name": "referer", "type": "string"},
      {"name": "url", "type": "string"},
