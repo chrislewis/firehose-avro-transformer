@@ -1,0 +1,16 @@
+{"namespace": "com.meetup.base.avro",
+ "type": "record",
+ "name": "View",
+ "doc": "v1",
+ "fields": [
+     {"name": "requestId", "type": "string"},
+     {"name": "timestamp", "type": "string"},
+     {"name": "memberId", "type": "int"},
+     {"name": "browserId", "type":"string", "default": "" },
+     {"name": "ip", "type": "string", "default": ""},
+     {"name": "agent", "type": "string", "default": ""},
+     {"name": "referrer", "type": "string"},
+     {"name": "url", "type": "string"},
+     {"name": "viewName", "type": ["null", "string"], "default": null}
+ ]
+}
