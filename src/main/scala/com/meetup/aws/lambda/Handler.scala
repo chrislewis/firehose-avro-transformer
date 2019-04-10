@@ -85,8 +85,7 @@ class Handler extends RequestHandler[Request, Response] {
   protected def doAppend(writer: DataFileWriter[GenericRecord], record: AvroRecord, schema: Schema) = {
     record.contentType match {
       case "application/json" =>
-        val unescapedJson = record.record.replace("\\\"", "\"")
-        val bin = new ByteArrayInputStream(unescapedJson.getBytes("UTF-8"))
+        val bin = new ByteArrayInputStream(record.record.getBytes("UTF-8"))
         val jsonDecoder = DecoderFactory.get.jsonDecoder(schema, bin)
         val datumReader = new GenericDatumReader[GenericRecord](schema)
         val datum = datumReader.read(null, jsonDecoder)
