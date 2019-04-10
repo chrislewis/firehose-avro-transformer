@@ -11,6 +11,6 @@
      {"name": "agent", "type": "string", "default": ""},
      {"name": "referrer", "type": "string"},
      {"name": "url", "type": "string"},
-     {"name": "viewName", "type": ["null", "string"], "default": null}
+     {"name": "viewName", "type": "string", "default": ""}
  ]
 }
