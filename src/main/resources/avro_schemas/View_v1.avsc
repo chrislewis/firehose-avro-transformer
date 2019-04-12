@@ -9,7 +9,7 @@
      {"name": "browserId", "type":"string", "default": "" },
      {"name": "ip", "type": "string", "default": ""},
      {"name": "agent", "type": "string", "default": ""},
-     {"name": "referrer", "type": "string"},
+     {"name": "referer", "type": "string"},
      {"name": "url", "type": "string"},
      {"name": "viewName", "type": "string", "default": ""}
  ]
